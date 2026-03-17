@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madot Technology | IT Solutions & Maintenance</title>
+    <!-- Google Fonts: Poppins for a modern, clean corporate look -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for fast-loading Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* === Core Variables === */
+        :root {
+            --brand-blue: #12b5f0;
+            --brand-blue-hover: #0ca4db;
+            --dark-text: #111827;
+            --gray-text: #4b5563;
+            --light-gray: #f3f4f6;
+            --white: #ffffff;
+            --border-color: #e5e7eb;
+            --transition: all 0.3s ease;
+        }
+
+        /* === Reset & Typography === */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { color: var(--gray-text); background-color: var(--white); overflow-x: hidden; line-height: 1.6; }
+        h1, h2, h3, h4, h5 { color: var(--dark-text); font-weight: 700; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+        .container { max-width: 1300px; margin: 0 auto; padding: 0 5%; }
+
+        /* === Top Bar === */
+        .top-bar {
+            background-color: var(--brand-blue); color: var(--white);
+            font-size: 0.85rem; font-weight: 500; padding: 8px 0;
+        }
+        .top-bar .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        .top-info { display: flex; gap: 20px; }
+        .top-info span i { margin-right: 5px; }
+
+        /* === Header === */
+        header { background: var(--white); border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
+        header .container { display: flex; justify-content: space-between; align-items: center; height: 80px; }
+        .logo { display: flex; align-items: center; gap: 10px; font-size: 1.8rem; color: var(--brand-blue); font-weight: 800; }
+        .logo i { font-size: 2rem; }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { font-weight: 600; font-size: 0.95rem; text-transform: uppercase; transition: var(--transition); }
+        .nav-links a:hover { color: var(--brand-blue); }
+        .header-actions { display: flex; gap: 20px; color: var(--brand-blue); font-size: 1.2rem; cursor: pointer; }
+
+        /* === Hero Section === */
+        .hero {
+            background: linear-gradient(to right, rgba(255,255,255,0.95) 40%, rgba(255,255,255,0.2)), 
+                        url('https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1600&q=70') center/cover no-repeat;
+            padding: 120px 0; min-height: 600px; display: flex; align-items: center;
+        }
+        .hero-content { max-width: 600px; }
+        .hero-subtitle { color: var(--brand-blue); font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; display: block; }
+        .hero h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 25px; text-transform: uppercase; }
+        .btn { display: inline-flex; align-items: center; gap: 10px; padding: 12px 30px; background: var(--brand-blue); color: var(--white); font-weight: 600; border-radius: 4px; border: none; cursor: pointer; transition: var(--transition); }
+        .btn:hover { background: var(--brand-blue-hover); transform: translateY(-2px); }
+
+        /* === Section Titles === */
+        .section-padding { padding: 90px 0; }
+        .section-title { text-align: center; margin-bottom: 60px; }
+        .section-title h2 { font-size: 2.5rem; text-transform: uppercase; letter-spacing: 1px; }
+        .section-title p { font-size: 1.1rem; color: var(--brand-blue); font-weight: 500; margin-top: 10px; }
+
+        /* === The Products We Sell === */
+        .products-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
+        .product-card { text-align: center; background: var(--white); border: 1px solid var(--border-color); padding: 30px 20px; border-radius: 8px; transition: var(--transition); }
+        .product-card:hover { border-color: var(--brand-blue); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .product-card img { height: 120px; object-fit: contain; margin: 0 auto 20px; }
+        .product-card h4 { text-transform: uppercase; color: var(--brand-blue); font-size: 1.1rem; }
+
+        /* === What We Do === */
+        .bg-light { background-color: var(--light-gray); }
+        .wwd-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .wwd-card { background: var(--white); border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .wwd-img { height: 220px; background-size: cover; background-position: center; position: relative; }
+        .wwd-title { position: absolute; bottom: 0; width: 100%; background: rgba(255,255,255,0.9); text-align: center; padding: 15px; font-size: 1.5rem; text-transform: uppercase; font-weight: 800; color: var(--dark-text); }
+
+        /* === Wide Variety of Services === */
+        .services-list-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; text-align: left; }
+        .service-list-card { padding: 30px; border-top: 4px solid var(--brand-blue); background: var(--white); box-shadow: 0 5px 20px rgba(0,0,0,0.04); }
+        .service-list-card .icon { font-size: 2.5rem; color: var(--brand-blue); margin-bottom: 20px; }
+        .service-list-card h3 { font-size: 1.3rem; margin-bottom: 20px; min-height: 55px; }
+        .service-list-card ul li { padding: 8px 0; border-bottom: 1px solid var(--border-color); display: flex; gap: 10px; font-size: 0.95rem; }
+        .service-list-card ul li:last-child { border: none; }
+        .service-list-card ul li i { color: var(--gray-text); margin-top: 5px; font-size: 0.8rem; }
+
+        /* === Preventive Maintenance Packages === */
+        .maintenance-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .m-card { background: var(--white); border: 1px solid var(--border-color); border-radius: 8px; position: relative; overflow: hidden; transition: var(--transition); }
+        .m-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); border-color: var(--brand-blue); }
+        .m-icon { position: absolute; top: 0; right: 0; background: var(--brand-blue); color: var(--white); padding: 15px 20px; border-bottom-left-radius: 8px; font-size: 1.5rem; }
+        .m-content { padding: 40px 30px; }
+        .m-content h3 { font-size: 1.4rem; margin-bottom: 5px; }
+        .m-content .pkg-type { color: #9ca3af; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 25px; display: block; }
+        .m-content ul li { display: flex; gap: 12px; margin-bottom: 15px; font-size: 0.9rem; align-items: flex-start; }
+        .m-content ul li i { color: var(--brand-blue); margin-top: 4px; font-size: 0.9rem; }
+
+        /* === Order Form Section === */
+        .order-section { background: var(--white); border-top: 1px solid var(--border-color); }
+        .order-container { max-width: 900px; margin: 0 auto; background: var(--light-gray); padding: 40px; border-radius: 8px; }
+        .order-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 30px; }
+        .input-group label { display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 8px; color: var(--dark-text); }
+        .input-group input { width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 4px; outline: none; }
+        .package-info { background: var(--white); padding: 20px; border-left: 4px solid var(--brand-blue); margin-bottom: 30px; }
+        .package-info h4 { font-size: 1.2rem; margin-bottom: 10px; }
+        .package-info p { margin-bottom: 5px; font-size: 0.95rem; }
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px; }
+        .options-grid div { background: var(--white); padding: 15px; border: 1px solid var(--border-color); border-radius: 4px; }
+        .options-grid h5 { margin-bottom: 5px; font-size: 1.1rem; }
+        .order-action h3 { font-size: 1.5rem; margin-bottom: 20px; text-transform: uppercase; }
+        .order-action .action-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+        .btn-full { width: 100%; justify-content: center; font-size: 1.1rem; padding: 15px; }
+
+        /* === Emergency Banner === */
+        .emergency-banner { background: var(--brand-blue); color: var(--white); padding: 40px 0; text-align: center; }
+        .emergency-banner h3 { color: var(--white); font-size: 1.3rem; margin-bottom: 20px; font-weight: 600; }
+        .btn-outline { background: transparent; border: 2px solid var(--white); color: var(--white); }
+        .btn-outline:hover { background: var(--white); color: var(--brand-blue); }
+
+        /* === Clients Section === */
+        .clients-grid { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 30px; opacity: 0.6; }
+        .client-logo { font-size: 1.5rem; font-weight: 700; color: var(--gray-text); display: flex; align-items: center; gap: 10px; }
+        .client-logo i { font-size: 2rem; color: var(--dark-text); }
+
+        /* === Footer === */
+        footer { background: var(--brand-blue); color: var(--white); padding: 80px 0 20px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 50px; }
+        .footer-col h3 { color: var(--white); font-size: 1.2rem; margin-bottom: 25px; text-transform: capitalize; }
+        .footer-logo { font-size: 2rem; font-weight: 800; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .footer-col ul li { margin-bottom: 12px; font-size: 0.95rem; }
+        .footer-col ul li i { margin-right: 10px; width: 15px; }
+        .newsletter input { width: 100%; padding: 12px; border: none; border-radius: 4px; margin-bottom: 10px; }
+        .footer-bottom { text-align: center; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.2); font-size: 0.9rem; }
+        .social-links { margin-top: 15px; }
+        .social-links a { display: inline-flex; align-items: center; justify-content: center; width: 35px; height: 35px; background: rgba(255,255,255,0.1); border-radius: 50%; margin: 0 5px; transition: var(--transition); }
+        .social-links a:hover { background: var(--white); color: var(--brand-blue); }
+
+        /* === Responsive === */
+        @media(max-width: 992px) {
+            .products-grid, .wwd-grid, .services-list-grid, .maintenance-grid, .footer-grid { grid-template-columns: repeat(2, 1fr); }
+            .order-grid { grid-template-columns: 1fr; }
+        }
+        @media(max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.8rem; }
+            .products-grid, .wwd-grid, .services-list-grid, .maintenance-grid, .footer-grid, .options-grid, .order-action .action-inputs { grid-template-columns: 1fr; }
+            .top-info { flex-direction: column; gap: 5px; text-align: center; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-info">
+                <span><i class="fas fa-phone-alt"></i> +251-912-958926</span>
+                <span><i class="fas fa-envelope"></i> info@madotcomputer.com</span>
+                <span><i class="fas fa-clock"></i> Mon - Sat: 8.30 am - 5.30 pm</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="container">
+            <a href="#" class="logo"><i class="fas fa-laptop-medical"></i> Madot</a>
+            <nav class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#shop">Shop</a>
+                <a href="#services">Services</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <div class="header-actions">
+                <i class="fas fa-shopping-cart" title="Cart"></i>
+                <i class="fas fa-heart" title="Wishlist"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content gs-reveal">
+                <span class="hero-subtitle">Connect First Via Technology</span>
+                <h1>Madot Technology</h1>
+                <p style="font-size: 1.1rem; margin-bottom: 30px; color: var(--gray-text); max-width: 500px;">
+                    Your trusted partner for enterprise-grade hardware sales, comprehensive IT support, and professional preventive maintenance.
+                </p>
+                <a href="#shop" class="btn">Learn More <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Products We Sell -->
+    <section id="shop" class="section-padding bg-light">
+        <div class="container">
+            <div class="section-title gs-reveal">
+                <h2>The Products We Sell</h2>
+                <p>High-performance computing and enterprise hardware</p>
+            </div>
+            <div class="products-grid">
+                <div class="product-card gs-stagger">
+                    <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&w=300&q=70" alt="Desktops">
+                    <h4>Desktops</h4>
+                </div>
+                <div class="product-card gs-stagger">
+                    <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=300&q=70" alt="Laptops">
+                    <h4>Laptops</h4>
+                </div>
+                <div class="product-card gs-stagger">
+                    <img src="https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&w=300&q=70" alt="Printers">
+                    <h4>Printers</h4>
+                </div>
+                <div class="product-card gs-stagger">
+                    <img src="https://images.unsplash.com/photo-1535016120720-40c746a51d47?auto=format&fit=crop&w=300&q=70" alt="Projectors">
+                    <h4>Projectors</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What We Do? -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-title gs-reveal">
+                <h2>What We Do?</h2>
+                <p>Delivering end-to-end technology solutions</p>
+            </div>
+            <div class="wwd-grid">
+                <div class="wwd-card gs-stagger">
+                    <div class="wwd-img" style="background-image: url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=600&q=70');">
+                        <div class="wwd-title">Sales</div>
+                    </div>
+                </div>
+                <div class="wwd-card gs-stagger">
+                    <div class="wwd-img" style="background-image: url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=600&q=70');">
+                        <div class="wwd-title">Support</div>
+                    </div>
+                </div>
+                <div class="wwd-card gs-stagger">
+                    <div class="wwd-img" style="background-image: url('https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=600&q=70');">
+                        <div class="wwd-title">Solution</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Services -->
+    <section id="services" class="section-padding bg-light">
+        <div class="container">
+            <div class="section-title gs-reveal">
+                <h2>We Offer a Wide Variety of Services</h2>
+                <p>Professional IT maintenance and network infrastructure</p>
+            </div>
+            <div class="services-list-grid">
+                <!-- Service 1 -->
+                <div class="service-list-card gs-stagger">
+                    <div class="icon"><i class="fas fa-microchip"></i></div>
+                    <h3>Hardware and Software Maintenance</h3>
+                    <ul>
+                        <li><i class="fas fa-minus"></i> Laptop Computer</li>
+                        <li><i class="fas fa-minus"></i> Desktop Computer</li>
+                        <li><i class="fas fa-minus"></i> Server Computer</li>
+                    </ul>
+                </div>
+                <!-- Service 2 -->
+                <div class="service-list-card gs-stagger">
+                    <div class="icon"><i class="fas fa-print"></i></div>
+                    <h3>Office Equipment Maintenance</h3>
+                    <ul>
+                        <li><i class="fas fa-minus"></i> Printer</li>
+                        <li><i class="fas fa-minus"></i> Light and Heavy-duty photocopy Machine</li>
+                        <li><i class="fas fa-minus"></i> Scanner</li>
+                        <li><i class="fas fa-minus"></i> Duplicators</li>
+                    </ul>
+                </div>
+                <!-- Service 3 -->
+                <div class="service-list-card gs-stagger">
+                    <div class="icon"><i class="fas fa-network-wired"></i></div>
+                    <h3>Installation and Configuration</h3>
+                    <ul>
+                        <li><i class="fas fa-minus"></i> We provide installation service with network configuration.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Preventive Maintenance Plans -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-title gs-reveal">
+                <span class="hero-subtitle" style="font-size: 0.9rem;">Choose Your Plan</span>
+                <h2>Preventive Maintenance Service Package</h2>
+            </div>
+            <div class="maintenance-grid">
+                <!-- Package 1 -->
+                <div class="m-card gs-stagger">
+                    <div class="m-icon"><i class="fas fa-desktop"></i></div>
+                    <div class="m-content">
+                        <h3>Computer maintenance service</h3>
+                        <span class="pkg-type">Monthly Package</span>
+                        <ul>
+                            <li><i class="fas fa-check"></i> <span>Installing and updating latest antivirus</span></li>
+                            <li><i class="fas fa-check"></i> <span>Scanning for virus and disinfecting</span></li>
+                            <li><i class="fas fa-check"></i> <span>Check internet network connectivity</span></li>
+                            <li><i class="fas fa-check"></i> <span>Upgrade of operating system</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Package 2 -->
+                <div class="m-card gs-stagger">
+                    <div class="m-icon"><i class="fas fa-print"></i></div>
+                    <div class="m-content">
+                        <h3>Printer maintenance service</h3>
+                        <span class="pkg-type">Monthly Package</span>
+                        <ul>
+                            <li><i class="fas fa-check"></i> <span>Blowing of dust particles off the inside and outside parts of the machine</span></li>
+                            <li><i class="fas fa-check"></i> <span>Cleaning of mechanical parts of the paper path with appropriate cleaning solutions and rugs. B7</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Package 3 -->
+                <div class="m-card gs-stagger">
+                    <div class="m-icon"><i class="fas fa-copy"></i></div>
+                    <div class="m-content">
+                        <h3>Photocopy maintenance service</h3>
+                        <span class="pkg-type">Monthly Package</span>
+                        <ul>
+                            <li><i class="fas fa-check"></i> <span>Blowing off dust particles off the inside and outside parts of the machine</span></li>
+                            <li><i class="fas fa-check"></i> <span>Washing all body parts of the machine with appropriate cleaning solution</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Order Form (Exactly mirroring provided screenshot) -->
+    <section class="section-padding order-section bg-light">
+        <div class="container">
+            <div class="order-container gs-reveal">
+                
+                <div class="order-grid">
+                    <div class="input-group">
+                        <label>Number of Desktops/laptops</label>
+                        <input type="number" placeholder="e.g. 5" value="5">
+                    </div>
+                    <div class="input-group">
+                        <label>Number of printers</label>
+                        <input type="number" placeholder="e.g. 3" value="3">
+                    </div>
+                    <div class="input-group">
+                        <label>Number of Copy Machine</label>
+                        <input type="number" placeholder="e.g. 1" value="1">
+                    </div>
+                </div>
+
+                <div class="package-info">
+                    <h4>package 1</h4>
+                    <p>-number of desktops/laptops: 5</p>
+                    <p>-number of printers: 3</p>
+                    <p>-number of photocopy machines: 1</p>
+                </div>
+
+                <div class="options-grid">
+                    <div>
+                        <h5>option 1</h5>
+                        <p style="color: var(--gray-text); font-size: 0.9rem;">-schedule: once in a month</p>
+                    </div>
+                    <div>
+                        <h5>option 2</h5>
+                        <p style="color: var(--gray-text); font-size: 0.9rem;">-schedule: once in two months</p>
+                    </div>
+                </div>
+
+                <div class="order-action">
+                    <h3>order now</h3>
+                    <div class="action-inputs">
+                        <div class="input-group">
+                            <label>your name:</label>
+                            <input type="text" placeholder="full name">
+                        </div>
+                        <div class="input-group">
+                            <label>phone number:</label>
+                            <input type="text" placeholder="phone number">
+                        </div>
+                    </div>
+                    <button class="btn btn-full">order</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency Banner -->
+    <section class="emergency-banner gs-reveal">
+        <div class="container">
+            <h3>We offer our package users free maintenance service if any emergency machine break downs occur!! Just give us a call</h3>
+            <a href="tel:+251912958926" class="btn btn-outline"><i class="fas fa-phone-alt"></i> CALL US +251-912-958926</a>
+        </div>
+    </section>
+
+    <!-- Our Clients -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-title gs-reveal">
+                <h2>Our Clients</h2>
+            </div>
+            <div class="clients-grid gs-stagger">
+                <div class="client-logo"><i class="fas fa-satellite-dish"></i> ethio telecom</div>
+                <div class="client-logo"><i class="fas fa-plug"></i> EURO CABLE PLC.</div>
+                <div class="client-logo" style="color:#d32f2f; opacity:1;"><i class="fas fa-globe"></i> giz</div>
+                <div class="client-logo"><i class="fas fa-car"></i> MOENCO</div>
+                <div class="client-logo"><i class="fas fa-clinic-medical"></i> Ministry of Health</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Matching image 1 & 3 exactly) -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Col 1 -->
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <i class="fas fa-laptop-medical"></i> Madot
+                    </div>
+                    <p style="color: #cbd5e1; font-size: 0.95rem; margin-bottom: 20px;">
+                        info@madotcomputer.com<br>
+                        <i class="fas fa-phone-alt"></i> +251-912-958926
+                    </p>
+                    <div class="newsletter">
+                        <p style="margin-bottom: 10px; font-weight: 600;">Subscribe to our newsletter</p>
+                        <input type="email" placeholder="Your email">
+                        <button class="btn" style="padding: 10px 20px; font-size: 0.9rem;">SUBSCRIBE NOW</button>
+                    </div>
+                </div>
+
+                <!-- Col 2 -->
+                <div class="footer-col">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">Sales</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Solution</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3 -->
+                <div class="footer-col">
+                    <h3>Useful links</h3>
+                    <ul>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">ET Cargo</a></li>
+                        <li><a href="#">Testimonials</a></li>
+                        <li><a href="#">Contact us</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Col 4 -->
+                <div class="footer-col">
+                    <h3 style="margin-bottom: 10px;">MADOT TECHNOLOGY</h3>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>Copyright © 2021 | All Rights Reserved.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#"><i class="fab fa-telegram-plane"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Optimized GSAP (Lightweight implementation to prevent lag) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Simple, highly performant fade-up reveal for sections
+            gsap.utils.toArray('.gs-reveal').forEach(function(elem) {
+                gsap.fromTo(elem, 
+                    { y: 30, opacity: 0 }, 
+                    { 
+                        y: 0, opacity: 1, duration: 0.6, ease: "power1.out",
+                        scrollTrigger: {
+                            trigger: elem,
+                            start: "top 85%",
+                            toggleActions: "play none none none"
+                        }
+                    }
+                );
+            });
+
+            // Performant Stagger for grids (Products, Services, Packages)
+            const grids =[".products-grid", ".wwd-grid", ".services-list-grid", ".maintenance-grid", ".clients-grid"];
+            
+            grids.forEach(gridClass => {
+                const grid = document.querySelector(gridClass);
+                if(grid) {
+                    gsap.fromTo(grid.querySelectorAll('.gs-stagger, .client-logo'),
+                        { y: 30, opacity: 0 },
+                        {
+                            y: 0, opacity: 1, duration: 0.5, stagger: 0.1, ease: "power1.out",
+                            scrollTrigger: {
+                                trigger: grid,
+                                start: "top 85%",
+                                toggleActions: "play none none none"
+                            }
+                        }
+                    );
+                }
+            });
+        });
+    </script>
+</body>
+</html>
