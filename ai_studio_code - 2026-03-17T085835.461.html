@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madot Technology | Enterprise IT Solutions</title>
+    
+    <!-- Premium Font: Inter (The standard for high-end tech design) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* === CORE VARIABLES === */
+        :root {
+            --brand: #12b5f0;
+            --brand-hover: #0c98cb;
+            --bg-main: #ffffff;
+            --bg-sec: #f8fafc;
+            --bg-third: #f1f5f9;
+            --text-dark: #0f172a;
+            --text-p: #475569;
+            --text-light: #94a3b8;
+            --border-color: #e2e8f0;
+            --shadow-soft: 0 40px 80px -20px rgba(15, 23, 42, 0.05);
+            --shadow-card: 0 10px 30px -10px rgba(15, 23, 42, 0.05);
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* === RESET & BASE === */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html.lenis { height: auto; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; object-fit: cover; }
+        
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 5vw; }
+        .grid-12 { display: grid; grid-template-columns: repeat(12, 1fr); gap: 30px; }
+
+        /* === BUTTONS & UTILITIES === */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+            padding: 16px 32px; font-weight: 500; font-size: 1rem;
+            border-radius: 8px; transition: all 0.4s var(--ease-out-expo); cursor: pointer; border: none;
+        }
+        .btn-primary { background: var(--brand); color: #fff; }
+        .btn-primary:hover { background: var(--brand-hover); transform: translateY(-2px); box-shadow: 0 10px 20px rgba(18, 181, 240, 0.2); }
+        .btn-outline { background: transparent; border: 1px solid var(--border-color); color: var(--text-dark); }
+        .btn-outline:hover { border-color: var(--brand); color: var(--brand); background: var(--bg-sec); }
+        
+        .eyebrow { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--brand); margin-bottom: 20px; display: block; }
+        .section-padding { padding: 150px 0; }
+        
+        /* === NAVIGATION === */
+        .top-bar { background: var(--bg-sec); padding: 10px 0; font-size: 0.8rem; font-weight: 500; color: var(--text-p); border-bottom: 1px solid var(--border-color); }
+        .top-bar .container { display: flex; justify-content: space-between; }
+        .tb-left { display: flex; gap: 30px; }
+        .tb-left i { color: var(--brand); margin-right: 8px; }
+
+        header { position: fixed; top: 38px; width: 100%; z-index: 100; transition: all 0.4s var(--ease-out-expo); background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid transparent; }
+        header.scrolled { top: 0; border-bottom: 1px solid var(--border-color); padding: 10px 0; }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; height: 80px; }
+        .logo { font-size: 1.8rem; font-weight: 800; color: var(--brand); display: flex; align-items: center; gap: 10px; letter-spacing: -0.5px; }
+        .nav-links { display: flex; gap: 40px; }
+        .nav-links a { font-size: 0.95rem; font-weight: 500; color: var(--text-dark); transition: color 0.3s; }
+        .nav-links a:hover { color: var(--brand); }
+        .nav-actions { display: flex; gap: 20px; font-size: 1.2rem; color: var(--text-dark); }
+
+        /* === EDITORIAL HERO === */
+        .hero { min-height: 100vh; display: flex; align-items: center; padding-top: 100px; position: relative; }
+        .hero .grid-12 { align-items: center; }
+        .hero-content { grid-column: span 6; padding-right: 40px; }
+        .hero-title-wrapper { overflow: hidden; margin-bottom: 20px; }
+        .hero-title { font-size: clamp(3rem, 5vw, 5rem); font-weight: 800; line-height: 1.05; letter-spacing: -1.5px; color: var(--text-dark); }
+        .hero-desc { font-size: 1.2rem; color: var(--text-p); margin-bottom: 40px; line-height: 1.6; max-width: 90%; }
+        
+        /* Realistic Image Masking */
+        .hero-image-wrapper { grid-column: span 6; height: 75vh; position: relative; border-radius: 16px; overflow: hidden; transform: translateZ(0); }
+        .hero-image { width: 100%; height: 120%; object-fit: cover; position: absolute; top: -10%; left: 0; }
+        .hero-image-overlay { position: absolute; inset: 0; background: inset; }
+
+        /* === CLIENTS TRUST BAR === */
+        .clients { border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding: 40px 0; background: var(--bg-sec); overflow: hidden; }
+        .clients-track { display: flex; width: max-content; animation: scroll 40s linear infinite; }
+        .clients-track:hover { animation-play-state: paused; }
+        .client-logo { font-size: 1.5rem; font-weight: 700; color: var(--text-light); margin: 0 50px; display: flex; align-items: center; gap: 10px; transition: 0.3s; filter: grayscale(100%); opacity: 0.6; }
+        .client-logo:hover { filter: grayscale(0%); opacity: 1; color: var(--text-dark); }
+        .client-logo i { color: var(--brand); font-size: 2rem; }
+        @keyframes scroll { to { transform: translateX(-50%); } }
+
+        /* === WHAT WE DO (Editorial Cards) === */
+        .wwd-header { grid-column: span 12; display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 80px; }
+        .wwd-header h2 { font-size: 3rem; font-weight: 700; letter-spacing: -1px; }
+        .wwd-card { grid-column: span 4; display: flex; flex-direction: column; gap: 20px; cursor: pointer; }
+        .wwd-img-container { width: 100%; aspect-ratio: 4/3; overflow: hidden; border-radius: 12px; position: relative; }
+        .wwd-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s var(--ease-out-expo); }
+        .wwd-card:hover .wwd-img { transform: scale(1.05); }
+        .wwd-info h3 { font-size: 1.5rem; font-weight: 600; margin-bottom: 10px; }
+        .wwd-info p { color: var(--text-p); font-size: 1rem; }
+
+        /* === PRODUCTS (Clean E-Commerce Grid) === */
+        .products-section { background: var(--bg-sec); }
+        .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-top: 60px; }
+        .product-item { background: var(--bg-main); padding: 40px 20px; border-radius: 16px; text-align: center; border: 1px solid var(--border-color); transition: all 0.4s var(--ease-out-expo); }
+        .product-item:hover { transform: translateY(-10px); box-shadow: var(--shadow-soft); border-color: transparent; }
+        .product-item img { height: 180px; margin: 0 auto 30px; object-fit: contain; mix-blend-mode: darken; }
+        .product-item h4 { font-size: 1.2rem; font-weight: 600; color: var(--text-dark); text-transform: uppercase; letter-spacing: 1px; }
+
+        /* === INTERACTIVE SERVICES LIST === */
+        .services-section .grid-12 { align-items: center; }
+        .svc-list { grid-column: span 6; display: flex; flex-direction: column; gap: 20px; }
+        .svc-item { padding: 30px; border-radius: 16px; border: 1px solid transparent; transition: all 0.4s ease; cursor: pointer; }
+        .svc-item.active { background: var(--bg-sec); border-color: var(--border-color); }
+        .svc-item h3 { font-size: 1.8rem; font-weight: 600; margin-bottom: 15px; display: flex; align-items: center; gap: 15px; }
+        .svc-item h3 i { color: var(--brand); font-size: 1.5rem; }
+        .svc-item ul { display: none; margin-top: 15px; padding-left: 45px; }
+        .svc-item.active ul { display: block; animation: fadeIn 0.5s ease forwards; }
+        .svc-item ul li { font-size: 1.1rem; color: var(--text-p); margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .svc-item ul li::before { content: '•'; color: var(--brand); font-size: 1.5rem; }
+        
+        .svc-visual { grid-column: span 6; position: relative; height: 600px; border-radius: 16px; overflow: hidden; }
+        .svc-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.6s ease; }
+        .svc-img.active { opacity: 1; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* === PREMIUM MAINTENANCE PLANS === */
+        .plans-section { background: var(--bg-main); border-top: 1px solid var(--border-color); }
+        .plan-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 60px; }
+        .plan-card { border: 1px solid var(--border-color); border-radius: 16px; padding: 50px 40px; transition: all 0.4s var(--ease-out-expo); display: flex; flex-direction: column; }
+        .plan-card:hover { border-color: var(--brand); box-shadow: var(--shadow-card); }
+        .plan-header { margin-bottom: 40px; padding-bottom: 30px; border-bottom: 1px solid var(--border-color); }
+        .plan-icon { width: 50px; height: 50px; background: var(--bg-sec); color: var(--brand); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 20px; }
+        .plan-header h3 { font-size: 1.5rem; font-weight: 600; margin-bottom: 5px; }
+        .plan-header span { font-size: 0.9rem; color: var(--text-light); font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
+        .plan-list { flex-grow: 1; margin-bottom: 40px; }
+        .plan-list li { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 20px; font-size: 1rem; color: var(--text-p); }
+        .plan-list li i { color: var(--brand); font-size: 1rem; margin-top: 4px; }
+
+        /* === ENGINEERED ORDER FORM === */
+        .order-section { background: var(--bg-sec); }
+        .form-wrapper { background: var(--bg-main); border-radius: 24px; border: 1px solid var(--border-color); padding: 60px; box-shadow: var(--shadow-soft); max-width: 1000px; margin: 0 auto; }
+        .form-title { font-size: 2.5rem; font-weight: 700; margin-bottom: 40px; text-align: center; letter-spacing: -1px; }
+        
+        /* Floating Label Inputs */
+        .input-group { position: relative; margin-bottom: 30px; }
+        .input-group input { width: 100%; padding: 20px 20px 10px; background: var(--bg-third); border: 1px solid transparent; border-radius: 12px; font-size: 1.1rem; font-family: 'Inter'; color: var(--text-dark); transition: all 0.3s ease; outline: none; }
+        .input-group label { position: absolute; top: 50%; left: 20px; transform: translateY(-50%); font-size: 1rem; color: var(--text-light); transition: all 0.3s ease; pointer-events: none; }
+        .input-group input:focus, .input-group input:not(:placeholder-shown) { border-color: var(--brand); background: var(--bg-main); box-shadow: 0 0 0 4px rgba(18, 181, 240, 0.1); }
+        .input-group input:focus + label, .input-group input:not(:placeholder-shown) + label { top: 12px; font-size: 0.75rem; font-weight: 600; color: var(--brand); }
+        
+        .grid-3-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        
+        .package-summary { background: var(--bg-sec); border-radius: 12px; padding: 30px; margin-bottom: 30px; border: 1px solid var(--border-color); display: flex; gap: 40px; }
+        .pkg-data h4 { font-size: 1.2rem; font-weight: 600; margin-bottom: 15px; }
+        .pkg-data p { color: var(--text-p); margin-bottom: 5px; font-size: 0.95rem; }
+        
+        .radio-options { display: flex; gap: 20px; flex-grow: 1; }
+        .radio-card { flex: 1; border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; cursor: pointer; transition: all 0.3s ease; background: var(--bg-main); position: relative; }
+        .radio-card:hover { border-color: var(--brand); }
+        .radio-card.selected { border-color: var(--brand); background: rgba(18, 181, 240, 0.03); box-shadow: 0 0 0 1px var(--brand); }
+        .radio-card h5 { font-size: 1.1rem; font-weight: 600; margin-bottom: 5px; }
+        .radio-card p { font-size: 0.9rem; color: var(--text-light); }
+        
+        /* === EMERGENCY BANNER === */
+        .emergency { background: var(--brand); padding: 40px 0; text-align: center; color: #fff; }
+        .emergency h3 { font-size: 1.5rem; font-weight: 500; margin-bottom: 20px; letter-spacing: -0.5px; }
+
+        /* === FOOTER === */
+        footer { background: var(--bg-main); padding: 100px 0 40px; border-top: 1px solid var(--border-color); }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 60px; margin-bottom: 80px; }
+        .f-logo { font-size: 2rem; font-weight: 800; color: var(--brand); margin-bottom: 20px; display: inline-flex; align-items: center; gap: 10px; }
+        .f-desc { color: var(--text-p); margin-bottom: 30px; font-size: 1rem; max-width: 300px; }
+        .f-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 25px; color: var(--text-dark); }
+        .f-links li { margin-bottom: 15px; }
+        .f-links a { color: var(--text-p); transition: color 0.3s; }
+        .f-links a:hover { color: var(--brand); }
+        .newsletter-box { display: flex; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; padding: 5px; background: var(--bg-sec); transition: 0.3s; }
+        .newsletter-box:focus-within { border-color: var(--brand); background: var(--bg-main); }
+        .newsletter-box input { flex: 1; border: none; padding: 10px 15px; outline: none; background: transparent; }
+        .newsletter-box button { background: var(--text-dark); color: #fff; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: 500; transition: 0.3s; }
+        .newsletter-box button:hover { background: var(--brand); }
+        .footer-bottom { border-top: 1px solid var(--border-color); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; color: var(--text-light); font-size: 0.9rem; }
+        .socials a { color: var(--text-p); margin-left: 20px; font-size: 1.2rem; transition: 0.3s; }
+        .socials a:hover { color: var(--brand); }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 1024px) {
+            .hero-content { grid-column: span 12; padding-right: 0; text-align: center; }
+            .hero-image-wrapper { grid-column: span 12; height: 50vh; margin-top: 40px; }
+            .hero-desc { margin: 0 auto 40px; }
+            .wwd-card { grid-column: span 12; }
+            .product-grid, .plan-grid { grid-template-columns: repeat(2, 1fr); }
+            .svc-list, .svc-visual { grid-column: span 12; }
+            .svc-visual { height: 400px; margin-top: 40px; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .nav-links, .top-bar { display: none; }
+            .grid-3-col { grid-template-columns: 1fr; }
+            .package-summary { flex-direction: column; gap: 20px; }
+            .radio-options { flex-direction: column; }
+            .product-grid, .plan-grid, .footer-grid { grid-template-columns: 1fr; }
+            .hero-title { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Professional Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="tb-left">
+                <span><i class="fas fa-phone-alt"></i> +251-912-958926</span>
+                <span><i class="fas fa-envelope"></i> info@madotcomputer.com</span>
+            </div>
+            <div>
+                <span><i class="fas fa-clock" style="color:var(--brand); margin-right:8px;"></i> Mon - Sat: 8.30 am - 5.30 pm</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Crisp, Glassmorphism Header -->
+    <header id="header">
+        <div class="container header-inner">
+            <a href="#" class="logo"><i class="fas fa-laptop-code"></i> Madot</a>
+            <nav class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#shop">Shop</a>
+                <a href="#services">Services</a>
+                <a href="#plans">Maintenance</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <div class="nav-actions">
+                <i class="fas fa-shopping-cart"></i>
+                <i class="far fa-heart"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Editorial Hero Section -->
+    <section class="hero" id="home">
+        <div class="container grid-12">
+            <div class="hero-content">
+                <span class="eyebrow gs-fade">Connect First Via Technology</span>
+                <div class="hero-title-wrapper">
+                    <h1 class="hero-title gs-title">Madot Technology</h1>
+                </div>
+                <div class="hero-title-wrapper" style="margin-bottom: 30px;">
+                    <h1 class="hero-title gs-title" style="color: var(--brand);">Solutions.</h1>
+                </div>
+                <p class="hero-desc gs-fade">Your premier partner for enterprise-grade hardware sales, expert infrastructure support, and professional proactive maintenance across Ethiopia.</p>
+                <div class="gs-fade">
+                    <a href="#services" class="btn btn-primary">Explore Services</a>
+                    <a href="#contact" class="btn btn-outline" style="margin-left: 15px;">Contact Us</a>
+                </div>
+            </div>
+            
+            <div class="hero-image-wrapper gs-img-reveal">
+                <!-- Extremely high quality, realistic tech office photo -->
+                <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=1600&q=80" alt="Professional IT Support" class="hero-image" id="hero-parallax">
+            </div>
+        </div>
+    </section>
+
+    <!-- Infinite Trust Marquee -->
+    <div class="clients">
+        <div class="clients-track">
+            <div class="client-logo"><i class="fas fa-satellite-dish"></i> Ethio Telecom</div>
+            <div class="client-logo"><i class="fas fa-plug"></i> Euro Cable PLC.</div>
+            <div class="client-logo"><i class="fas fa-globe-africa"></i> GIZ</div>
+            <div class="client-logo"><i class="fas fa-car"></i> MOENCO</div>
+            <div class="client-logo"><i class="fas fa-clinic-medical"></i> Ministry of Health</div>
+            
+            <!-- Duplicated for infinite effect -->
+            <div class="client-logo"><i class="fas fa-satellite-dish"></i> Ethio Telecom</div>
+            <div class="client-logo"><i class="fas fa-plug"></i> Euro Cable PLC.</div>
+            <div class="client-logo"><i class="fas fa-globe-africa"></i> GIZ</div>
+            <div class="client-logo"><i class="fas fa-car"></i> MOENCO</div>
+            <div class="client-logo"><i class="fas fa-clinic-medical"></i> Ministry of Health</div>
+        </div>
+    </div>
+
+    <!-- What We Do (Editorial Image Cards) -->
+    <section class="section-padding">
+        <div class="container grid-12">
+            <div class="wwd-header gs-fade">
+                <div>
+                    <span class="eyebrow">Expertise</span>
+                    <h2>What We Do.</h2>
+                </div>
+                <p style="color: var(--text-p); max-width: 400px; font-size: 1.1rem;">Delivering end-to-end IT solutions designed to scale with your business demands.</p>
+            </div>
+            
+            <!-- Card 1 -->
+            <div class="wwd-card gs-stagger">
+                <div class="wwd-img-container">
+                    <img src="https://images.unsplash.com/photo-1542393545-10f5cde2c810?auto=format&fit=crop&w=800&q=80" alt="Sales" class="wwd-img">
+                </div>
+                <div class="wwd-info">
+                    <h3>Sales</h3>
+                    <p>Top-tier enterprise desktops, laptops, printers, and accessories from global leading manufacturers.</p>
+                </div>
+            </div>
+            
+            <!-- Card 2 -->
+            <div class="wwd-card gs-stagger">
+                <div class="wwd-img-container">
+                    <img src="https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=800&q=80" alt="Support" class="wwd-img">
+                </div>
+                <div class="wwd-info">
+                    <h3>Support</h3>
+                    <p>Certified hardware and software maintenance to ensure zero operational downtime.</p>
+                </div>
+            </div>
+            
+            <!-- Card 3 -->
+            <div class="wwd-card gs-stagger">
+                <div class="wwd-img-container">
+                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80" alt="Solution" class="wwd-img">
+                </div>
+                <div class="wwd-info">
+                    <h3>Solution</h3>
+                    <p>Advanced network configuration, server room design, and secure security camera architecture.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services (Interactive Tab List) -->
+    <section class="section-padding services-section" id="services" style="background: var(--bg-main);">
+        <div class="container grid-12">
+            
+            <div class="svc-list gs-fade">
+                <span class="eyebrow">Comprehensive Setup</span>
+                <h2 style="font-size: 3rem; font-weight: 700; margin-bottom: 30px; letter-spacing: -1px;">Wide Variety of Services.</h2>
+                
+                <div class="svc-item active" data-target="img1">
+                    <h3><i class="fas fa-microchip"></i> Hardware & Software Maintenance</h3>
+                    <ul>
+                        <li>Laptop Computer Diagnosis & Repair</li>
+                        <li>Desktop Computer Upgrades</li>
+                        <li>Enterprise Server Maintenance</li>
+                    </ul>
+                </div>
+                
+                <div class="svc-item" data-target="img2">
+                    <h3><i class="fas fa-print"></i> Office Equipment Maintenance</h3>
+                    <ul>
+                        <li>Standard & Heavy-Duty Printers</li>
+                        <li>Photocopy Machines</li>
+                        <li>High-Resolution Scanners & Duplicators</li>
+                    </ul>
+                </div>
+                
+                <div class="svc-item" data-target="img3">
+                    <h3><i class="fas fa-network-wired"></i> Installation & Configuration</h3>
+                    <ul>
+                        <li>We provide complete hardware installation service paired with advanced network configuration.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="svc-visual gs-img-reveal">
+                <!-- High-res realistic images tied to the tabs -->
+                <img src="https://images.unsplash.com/photo-1629654261667-109defbc27ce?auto=format&fit=crop&w=1000&q=80" alt="Hardware Repair" class="svc-img active" id="img1">
+                <img src="https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?auto=format&fit=crop&w=1000&q=80" alt="Printers" class="svc-img" id="img2">
+                <img src="https://images.unsplash.com/photo-1544144433-d50aff500b91?auto=format&fit=crop&w=1000&q=80" alt="Networking" class="svc-img" id="img3">
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Products (Clean E-Commerce Feel) -->
+    <section class="section-padding products-section" id="shop">
+        <div class="container">
+            <div style="text-align: center;" class="gs-fade">
+                <span class="eyebrow">Hardware</span>
+                <h2 style="font-size: 3rem; font-weight: 700; letter-spacing: -1px;">The Products We Sell</h2>
+            </div>
+            
+            <div class="product-grid">
+                <div class="product-item gs-stagger">
+                    <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&w=500&q=80" alt="Desktops">
+                    <h4>Desktops</h4>
+                </div>
+                <div class="product-item gs-stagger">
+                    <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=500&q=80" alt="Laptops">
+                    <h4>Laptops</h4>
+                </div>
+                <div class="product-item gs-stagger">
+                    <img src="https://images.unsplash.com/photo-1535016120720-40c746a51d47?auto=format&fit=crop&w=500&q=80" alt="Projectors">
+                    <h4>Projectors</h4>
+                </div>
+                <div class="product-item gs-stagger">
+                    <img src="https://images.unsplash.com/photo-1555617781-8022d4c5d956?auto=format&fit=crop&w=500&q=80" alt="Accessories">
+                    <h4>Accessories</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Preventive Maintenance (Apple-style Pricing Cards) -->
+    <section class="section-padding plans-section" id="plans">
+        <div class="container">
+            <div style="text-align: center; max-width: 600px; margin: 0 auto;" class="gs-fade">
+                <span class="eyebrow">Choose Your Plan</span>
+                <h2 style="font-size: 3rem; font-weight: 700; letter-spacing: -1px;">Preventive Maintenance Packages</h2>
+            </div>
+
+            <div class="plan-grid">
+                <!-- Package 1 -->
+                <div class="plan-card gs-stagger">
+                    <div class="plan-header">
+                        <div class="plan-icon"><i class="fas fa-desktop"></i></div>
+                        <h3>Computer Service</h3>
+                        <span>Monthly Package</span>
+                    </div>
+                    <ul class="plan-list">
+                        <li><i class="fas fa-check"></i> Installing and updating latest antivirus</li>
+                        <li><i class="fas fa-check"></i> Scanning for virus and disinfecting</li>
+                        <li><i class="fas fa-check"></i> Check internet network connectivity</li>
+                        <li><i class="fas fa-check"></i> Upgrade of operating system</li>
+                    </ul>
+                    <button class="btn btn-outline" style="width: 100%;">Select Plan</button>
+                </div>
+                
+                <!-- Package 2 -->
+                <div class="plan-card gs-stagger" style="border-color: var(--brand); box-shadow: var(--shadow-card); position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--brand);"></div>
+                    <div class="plan-header">
+                        <div class="plan-icon" style="background: var(--brand); color: #fff;"><i class="fas fa-print"></i></div>
+                        <h3>Printer Service</h3>
+                        <span>Monthly Package</span>
+                    </div>
+                    <ul class="plan-list">
+                        <li><i class="fas fa-check"></i> Blowing of dust particles off the inside and outside parts of the machine</li>
+                        <li><i class="fas fa-check"></i> Cleaning of mechanical parts of the paper path with appropriate cleaning solutions and rugs. B7</li>
+                    </ul>
+                    <button class="btn btn-primary" style="width: 100%;">Select Plan</button>
+                </div>
+                
+                <!-- Package 3 -->
+                <div class="plan-card gs-stagger">
+                    <div class="plan-header">
+                        <div class="plan-icon"><i class="fas fa-copy"></i></div>
+                        <h3>Photocopy Service</h3>
+                        <span>Monthly Package</span>
+                    </div>
+                    <ul class="plan-list">
+                        <li><i class="fas fa-check"></i> Blowing off dust particles off the inside and outside parts of the machine</li>
+                        <li><i class="fas fa-check"></i> Washing all body parts of the machine with appropriate cleaning solution</li>
+                    </ul>
+                    <button class="btn btn-outline" style="width: 100%;">Select Plan</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="section-padding order-section">
+        <div class="container">
+            <div class="form-wrapper gs-fade">
+                <h3 class="form-title">Calculate & Order Now</h3>
+                
+                <!-- Device Inputs -->
+                <div class="grid-3-col">
+                    <div class="input-group">
+                        <input type="number" id="desktops" placeholder=" " value="5">
+                        <label for="desktops">Number of Desktops/Laptops</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="number" id="printers" placeholder=" " value="3">
+                        <label for="printers">Number of Printers</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="number" id="copy" placeholder=" " value="1">
+                        <label for="copy">Number of Copy Machines</label>
+                    </div>
+                </div>
+
+                <!-- Live Summary & Options -->
+                <div class="package-summary">
+                    <div class="pkg-data" style="min-width: 250px;">
+                        <h4>Package 1 Summary</h4>
+                        <p>Desktops/Laptops: <strong>5</strong></p>
+                        <p>Printers: <strong>3</strong></p>
+                        <p>Photocopy Machines: <strong>1</strong></p>
+                    </div>
+                    
+                    <div class="radio-options">
+                        <div class="radio-card selected" onclick="selectRadio(this)">
+                            <h5>Option 1</h5>
+                            <p>Schedule: Once in a month</p>
+                        </div>
+                        <div class="radio-card" onclick="selectRadio(this)">
+                            <h5>Option 2</h5>
+                            <p>Schedule: Once in two months</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Final Details -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 20px; align-items: start;">
+                    <div class="input-group" style="margin: 0;">
+                        <input type="text" id="fname" placeholder=" ">
+                        <label for="fname">Your Full Name</label>
+                    </div>
+                    <div class="input-group" style="margin: 0;">
+                        <input type="tel" id="phone" placeholder=" ">
+                        <label for="phone">Phone Number</label>
+                    </div>
+                    <button class="btn btn-primary" style="height: 56px; padding: 0 40px;">Submit Order</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- High Contrast Emergency Banner -->
+    <div class="emergency">
+        <div class="container">
+            <h3 class="gs-fade">We offer our package users free maintenance service if any emergency machine break downs occur!! Just give us a call.</h3>
+            <a href="tel:+251912958926" class="btn btn-outline gs-fade" style="background: #fff; color: var(--brand); border: none; font-weight: 700;">
+                <i class="fas fa-phone-alt"></i> Call Us: +251-912-958926
+            </a>
+        </div>
+    </div>
+
+    <!-- Minimalist Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <a href="#" class="f-logo"><i class="fas fa-laptop-code"></i> Madot</a>
+                    <p class="f-desc">Delivering reliable IT infrastructure, cutting-edge hardware sales, and enterprise maintenance solutions.</p>
+                    <p style="color: var(--text-dark); font-weight: 500; margin-bottom: 5px;"><i class="fas fa-envelope" style="color: var(--brand); width: 20px;"></i> info@madotcomputer.com</p>
+                    <p style="color: var(--text-dark); font-weight: 500;"><i class="fas fa-phone-alt" style="color: var(--brand); width: 20px;"></i> +251-912-958926</p>
+                </div>
+                
+                <div>
+                    <h4 class="f-title">Services</h4>
+                    <ul class="f-links">
+                        <li><a href="#">Sales</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Solution</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="f-title">Useful Links</h4>
+                    <ul class="f-links">
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">ET Cargo</a></li>
+                        <li><a href="#">Testimonials</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="f-title">Subscribe to our newsletter</h4>
+                    <div class="newsletter-box">
+                        <input type="email" placeholder="Your email address">
+                        <button>Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>Copyright © 2021 | All Rights Reserved. Madot Technology.</p>
+                <div class="socials">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts: Lenis (Smooth Scroll) & GSAP -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            // 1. Lenis Smooth Scrolling (Crucial for the "Senior/Premium" feel)
+            const lenis = new Lenis({
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                smooth: true,
+            });
+
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+            requestAnimationFrame(raf);
+
+            gsap.registerPlugin(ScrollTrigger);
+
+            // 2. Header Blur & Sticky logic
+            window.addEventListener('scroll', () => {
+                const header = document.getElementById('header');
+                if (window.scrollY > 50) header.classList.add('scrolled');
+                else header.classList.remove('scrolled');
+            });
+
+            // 3. Hero Animations (Highly engineered reveal)
+            const tl = gsap.timeline();
+            
+            // Image Mask Reveal
+            tl.fromTo(".hero-image-wrapper", 
+                { clipPath: "inset(100% 0 0 0)", scale: 1.1 }, 
+                { clipPath: "inset(0% 0 0 0)", scale: 1, duration: 1.5, ease: "power4.inOut" }
+            );
+
+            // Text Line Reveal
+            tl.fromTo(".gs-title", 
+                { y: "100%", opacity: 0 }, 
+                { y: "0%", opacity: 1, duration: 1, stagger: 0.1, ease: "power3.out" }, 
+                "-=1"
+            );
+
+            tl.fromTo(".gs-fade", 
+                { y: 20, opacity: 0 }, 
+                { y: 0, opacity: 1, duration: 1, stagger: 0.1, ease: "power2.out" }, 
+                "-=0.5"
+            );
+
+            // Hero Image Parallax on Scroll
+            gsap.to("#hero-parallax", {
+                yPercent: 20,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: ".hero",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true
+                }
+            });
+
+            // 4. Scroll Revelations for Sections
+            gsap.utils.toArray('.gs-fade').forEach(elem => {
+                gsap.fromTo(elem, 
+                    { y: 40, opacity: 0 }, 
+                    { 
+                        y: 0, opacity: 1, duration: 1, ease: "power3.out",
+                        scrollTrigger: { trigger: elem, start: "top 85%" }
+                    }
+                );
+            });
+
+            // Staggered Grids
+            const grids =[".wwd-card", ".product-item", ".plan-card"];
+            grids.forEach(selector => {
+                gsap.fromTo(selector, 
+                    { y: 50, opacity: 0 }, 
+                    { 
+                        y: 0, opacity: 1, duration: 0.8, stagger: 0.15, ease: "power3.out",
+                        scrollTrigger: { trigger: selector, start: "top 85%" }
+                    }
+                );
+            });
+
+            // 5. Interactive Services Tabs Logic
+            const svcItems = document.querySelectorAll('.svc-item');
+            const svcImgs = document.querySelectorAll('.svc-img');
+
+            svcItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    // Remove active from all
+                    svcItems.forEach(i => i.classList.remove('active'));
+                    svcImgs.forEach(img => img.classList.remove('active'));
+                    
+                    // Add active to clicked
+                    item.classList.add('active');
+                    const targetImg = document.getElementById(item.getAttribute('data-target'));
+                    targetImg.classList.add('active');
+                });
+            });
+
+        });
+
+        // Simple Radio Button Select Logic for Form
+        function selectRadio(element) {
+            document.querySelectorAll('.radio-card').forEach(card => card.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+    </script>
+</body>
+</html>
